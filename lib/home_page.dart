@@ -10,6 +10,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late String player;
+
+  void _setPlayer(String symbol) => player = symbol;
+
   void _selectPlayer() {
     showDialog(
       barrierDismissible: false,
@@ -26,12 +30,14 @@ class _HomePageState extends State<HomePage> {
               children: [
                 TextButton(
                   onPressed: () {
+                    _setPlayer('X');
                     Navigator.of(context).pop();
                   },
                   child: const Text('X'),
                 ),
                 TextButton(
                   onPressed: () {
+                    _setPlayer('O');
                     Navigator.of(context).pop();
                   },
                   child: const Text('O'),
