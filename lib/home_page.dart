@@ -10,9 +10,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late String player;
+  late final String _player;
 
-  void _setPlayer(String symbol) => player = symbol;
+  void _setPlayer(String symbol) => _player = symbol;
 
   void _selectPlayer() {
     showDialog(
@@ -23,24 +23,31 @@ class _HomePageState extends State<HomePage> {
           title: const Text(
             'Select Player',
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 35),
           ),
           actions: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
                   onPressed: () {
                     _setPlayer('X');
                     Navigator.of(context).pop();
                   },
-                  child: const Text('X'),
+                  child: const Text(
+                    'X',
+                    style: TextStyle(fontSize: 35),
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
                     _setPlayer('O');
                     Navigator.of(context).pop();
                   },
-                  child: const Text('O'),
+                  child: const Text(
+                    'O',
+                    style: TextStyle(fontSize: 35),
+                  ),
                 ),
               ],
             ),
