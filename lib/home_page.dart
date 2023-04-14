@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
                 TextButton(
                   onPressed: () {
                     _setPlayer('X');
+                    _setComputer('O');
                     Navigator.of(context).pop();
                   },
                   child: const Text(
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> {
                 TextButton(
                   onPressed: () {
                     _setPlayer('O');
+                    _setComputer('X');
                     Navigator.of(context).pop();
                   },
                   child: const Text(
