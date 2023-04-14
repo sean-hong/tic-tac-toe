@@ -10,9 +10,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final String _player;
+  late String _player;
+  late String _computer;
 
   void _setPlayer(String symbol) => _player = symbol;
+  void _setComputer(String symbol) => _computer = symbol;
 
   void _selectPlayer() {
     showDialog(
