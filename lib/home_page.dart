@@ -62,6 +62,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    Future(_selectPlayer);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -80,11 +87,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _selectPlayer,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
