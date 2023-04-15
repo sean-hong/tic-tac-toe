@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.lime,
+        primarySwatch: Colors.amber,
         brightness: Brightness.dark,
       ),
       home: const HomePage(title: 'Tic-Tac-Toe'),
