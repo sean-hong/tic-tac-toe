@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
           title: const Text(
             'Select Player',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 35),
+            style: TextStyle(fontSize: 75),
           ),
           actions: [
             Row(
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: const Text(
                     'X',
-                    style: TextStyle(fontSize: 35),
+                    style: TextStyle(fontSize: 75),
                   ),
                 ),
                 TextButton(
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: const Text(
                     'O',
-                    style: TextStyle(fontSize: 35),
+                    style: TextStyle(fontSize: 75),
                   ),
                 ),
               ],
