@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.lime,
-        brightness:  Brightness.dark,
+        brightness: Brightness.dark,
       ),
       home: const HomePage(title: 'Tic-Tac-Toe'),
     );
