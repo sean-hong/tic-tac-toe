@@ -109,6 +109,7 @@ class _HomePageState extends State<HomePage> {
               child: GridView.builder(
                 itemCount: 9,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 2.1,
                   crossAxisCount: 3,
                 ),
                 itemBuilder: (BuildContext context, int index) {
