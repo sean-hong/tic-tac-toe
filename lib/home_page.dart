@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' show Random;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -10,6 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List<String> _displaySymbols = ['', '', '', '', '', '', '', '', ''];
+  int _filledBoxes = 0;
+
   late String _player;
   late String _computer;
 
@@ -61,6 +65,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _enteredSymbol(int index) {
+    setState(() {
+      if (_displaySymbols[index] == '') {
+        _displaySymbols[index] = _player;
+        _filledBoxes++;
+      }
+
+      bool foundEmptyBox = false;
+
+      while (!foundEmptyBox) {
+        int randomBox = Random().nextInt(_displaySymbols.length);
+
+        if (_filledBoxes == 9) break;
+
+        if (_displaySymbols[randomBox] == '') {
+          foundEmptyBox = true;
+          _displaySymbols[randomBox] = _computer;
+          _filledBoxes++;
+        }
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -78,12 +105,34 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              'test',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Expanded(
+              child: GridView.builder(
+                itemCount: 9,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () => _enteredSymbol(index),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          _displaySymbols[index],
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 75,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
