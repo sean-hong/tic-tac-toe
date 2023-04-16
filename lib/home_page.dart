@@ -154,9 +154,9 @@ class _HomePageState extends State<HomePage> {
             _displaySymbols[randomBox] = _computer;
             _filledBoxes++;
           }
-        }
 
-        _checkWin();
+          _checkWin();
+        }
       }
     });
   }
