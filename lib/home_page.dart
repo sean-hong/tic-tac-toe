@@ -11,11 +11,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> _displaySymbols = ['', '', '', '', '', '', '', '', ''];
-  int _filledBoxes = 0;
+  static final List<String> _displaySymbols = ['', '', '', '', '', '', '', '', ''];
+  static int _filledBoxes = 0;
 
-  late String _player;
-  late String _computer;
+  static late String _player, _computer;
 
   void _setPlayer(String symbol) => _player = symbol;
   void _setComputer(String symbol) => _computer = symbol;
@@ -70,19 +69,22 @@ class _HomePageState extends State<HomePage> {
       if (_displaySymbols[index] == '') {
         _displaySymbols[index] = _player;
         _filledBoxes++;
-      }
 
-      bool foundEmptyBox = false;
+        /*
+        computer's turn
+        */
+        bool foundEmptyBox = false;
 
-      while (!foundEmptyBox) {
-        int randomBox = Random().nextInt(_displaySymbols.length);
+        while (!foundEmptyBox) {
+          int randomBox = Random().nextInt(_displaySymbols.length);
 
-        if (_filledBoxes == 9) break;
+          if (_filledBoxes == 9) break;
 
-        if (_displaySymbols[randomBox] == '') {
-          foundEmptyBox = true;
-          _displaySymbols[randomBox] = _computer;
-          _filledBoxes++;
+          if (_displaySymbols[randomBox] == '') {
+            foundEmptyBox = true;
+            _displaySymbols[randomBox] = _computer;
+            _filledBoxes++;
+          }
         }
       }
     });
@@ -124,8 +126,8 @@ class _HomePageState extends State<HomePage> {
                       child: Center(
                         child: Text(
                           _displaySymbols[index],
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: _displaySymbols[index] == 'X' ? Colors.red : Colors.green,
                             fontSize: 75,
                           ),
                         ),
