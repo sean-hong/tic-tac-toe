@@ -1,3 +1,4 @@
+import 'package:universal_html/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'dart:math' show Random;
 
@@ -91,7 +92,7 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: [
             TextButton(
-              onPressed: () => setState(() {}),
+              onPressed: () => html.window.location.reload(),
               child: const Text(
                 'play again?',
                 style: TextStyle(fontSize: 15),
