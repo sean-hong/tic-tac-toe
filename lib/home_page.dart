@@ -14,6 +14,8 @@ class _HomePageState extends State<HomePage> {
   static final List<String> _displaySymbols = ['', '', '', '', '', '', '', '', ''];
   static int _filledBoxes = 0;
 
+  static bool _isGameOver = false;
+
   static late String _player, _computer;
 
   void _setPlayer(String symbol) => _player = symbol;
@@ -64,6 +66,43 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void showResult(String message) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'Game Over',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 75,
+              color: Colors.brown,
+            ),
+          ),
+          content: Text(
+            message,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 50,
+              color: Colors.black,
+              backgroundColor: Colors.yellow,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => setState(() {}),
+              child: const Text(
+                'play again?',
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _checkWin() {
     String row1 = '${_displaySymbols[0]}${_displaySymbols[1]}${_displaySymbols[2]}';
     String row2 = '${_displaySymbols[3]}${_displaySymbols[4]}${_displaySymbols[5]}';
@@ -79,11 +118,14 @@ class _HomePageState extends State<HomePage> {
     List<String> winningMoves = [row1, row2, row3, col1, col2, col3, diag1, diag2];
 
     if (winningMoves.contains('XXX')) {
-      print('X won');
+      _isGameOver = true;
+      showResult('X won');
     } else if (winningMoves.contains('OOO')) {
-      print('O won');
+      _isGameOver = true;
+      showResult('O won');
     } else if (_filledBoxes == 9) {
-      print('draw');
+      _isGameOver = true;
+      showResult('Draw');
     } else {
       print('box being filled');
     }
@@ -95,12 +137,14 @@ class _HomePageState extends State<HomePage> {
         _displaySymbols[index] = _player;
         _filledBoxes++;
 
+        _checkWin();
+
         /*
         computer's turn
         */
         bool foundEmptyBox = false;
 
-        while (!foundEmptyBox) {
+        while (!foundEmptyBox && !_isGameOver) {
           int randomBox = Random().nextInt(_displaySymbols.length);
 
           if (_filledBoxes == 9) break;
@@ -111,9 +155,9 @@ class _HomePageState extends State<HomePage> {
             _filledBoxes++;
           }
         }
-      }
 
-      _checkWin();
+        _checkWin();
+      }
     });
   }
 
