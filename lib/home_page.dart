@@ -64,6 +64,31 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _checkWin() {
+    if (_filledBoxes == 9) {
+      print('draw');
+    }
+
+    String row1 = '${_displaySymbols[0]}${_displaySymbols[1]}${_displaySymbols[2]}';
+    String row2 = '${_displaySymbols[3]}${_displaySymbols[4]}${_displaySymbols[5]}';
+    String row3 = '${_displaySymbols[6]}${_displaySymbols[7]}${_displaySymbols[8]}';
+
+    String col1 = '${_displaySymbols[0]}${_displaySymbols[3]}${_displaySymbols[6]}';
+    String col2 = '${_displaySymbols[1]}${_displaySymbols[4]}${_displaySymbols[7]}';
+    String col3 = '${_displaySymbols[2]}${_displaySymbols[5]}${_displaySymbols[8]}';
+
+    String diag1 = '${_displaySymbols[0]}${_displaySymbols[4]}${_displaySymbols[8]}';
+    String diag2 = '${_displaySymbols[2]}${_displaySymbols[4]}${_displaySymbols[6]}';
+
+    if (row1 == 'XXX' || row2 == 'XXX' || row3 == 'XXX' || col1 == 'XXX' || col2 == 'XXX' || col3 == 'XXX' || diag1 == 'XXX' || diag2 == 'XXX') {
+      print('X won');
+    }
+
+    if (row1 == 'OOO' || row2 == 'OOO' || row3 == 'OOO' || col1 == 'OOO' || col2 == 'OOO' || col3 == 'OOO' || diag1 == 'OOO' || diag2 == 'OOO') {
+      print('O won');
+    }
+  }
+
   void _enteredSymbol(int index) {
     setState(() {
       if (_displaySymbols[index] == '') {
