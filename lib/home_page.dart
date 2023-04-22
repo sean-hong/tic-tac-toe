@@ -1,6 +1,7 @@
-import 'package:universal_html/html.dart' as html;
-import 'package:flutter/material.dart';
 import 'dart:math' show Random;
+
+import 'package:flutter/material.dart';
+import 'package:universal_html/html.dart' as html;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -69,7 +70,6 @@ class _HomePageState extends State<HomePage> {
 
   void showResult(String message) {
     showDialog(
-      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -95,7 +95,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => html.window.location.reload(),
               child: const Text(
                 'play again?',
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(
+                  fontSize: 15,
+                ),
               ),
             ),
           ],
@@ -128,7 +130,7 @@ class _HomePageState extends State<HomePage> {
       _isGameOver = true;
       showResult('Draw');
     } else {
-      print('box being filled');
+      return;
     }
   }
 
@@ -173,46 +175,45 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+        ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: GridView.builder(
-                itemCount: 9,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  //childAspectRatio: 2.1,
-                  crossAxisCount: 3,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () => _enteredSymbol(index),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white,
-                        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: GridView.builder(
+              itemCount: 9,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () => _enteredSymbol(index),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
                       ),
-                      child: Center(
-                        child: Text(
-                          _displaySymbols[index],
-                          style: TextStyle(
-                            color: _displaySymbols[index] == 'X'
-                                ? Colors.red
-                                : Colors.green,
-                            fontSize: 75,
-                          ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        _displaySymbols[index],
+                        style: TextStyle(
+                          color: _displaySymbols[index] == 'X'
+                              ? Colors.red
+                              : Colors.green,
+                          fontSize: 75,
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
