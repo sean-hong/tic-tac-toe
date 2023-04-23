@@ -1,7 +1,6 @@
 import 'dart:math' show Random;
 
 import 'package:flutter/material.dart';
-import 'package:universal_html/html.dart' as html;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -68,6 +67,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void clearBoard() {
+    setState(() {
+      for (int i = 0; i < _displaySymbols.length; i++) _displaySymbols[i] = '';
+      _filledBoxes = 0;
+    });
+  }
+
   void showResult(String message) {
     showDialog(
       context: context,
@@ -92,12 +98,13 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: [
             TextButton(
-              onPressed: () => html.window.location.reload(),
+              onPressed: () {
+                clearBoard();
+                Navigator.of(context).pop();
+              },
               child: const Text(
                 'play again?',
-                style: TextStyle(
-                  fontSize: 15,
-                ),
+                style: TextStyle(fontSize: 15),
               ),
             ),
           ],
@@ -175,12 +182,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.title,
-        ),
+        title: Text(widget.title),
+        centerTitle: true,
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
             child: GridView.builder(
