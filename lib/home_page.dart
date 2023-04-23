@@ -189,9 +189,7 @@ class _HomePageState extends State<HomePage> {
         itemCount: 9,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          childAspectRatio: (MediaQuery.of(context).size.width) /
-              (MediaQuery.of(context).size.height -
-                  (MediaQuery.of(context).padding.top + kToolbarHeight)),
+          childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height - (MediaQuery.of(context).padding.top + kToolbarHeight)),
         ),
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
