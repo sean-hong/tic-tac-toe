@@ -69,7 +69,10 @@ class _HomePageState extends State<HomePage> {
 
   void clearBoard() {
     setState(() {
-      for (int i = 0; i < _displaySymbols.length; i++) _displaySymbols[i] = '';
+      for (int i = 0; i < _displaySymbols.length; i++) {
+        _displaySymbols[i] = '';
+      }
+
       _filledBoxes = 0;
       _isGameOver = false;
     });
