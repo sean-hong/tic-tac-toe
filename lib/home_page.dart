@@ -185,40 +185,37 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: GridView.builder(
-              itemCount: 9,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+      body: GridView.builder(
+        itemCount: 9,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: (MediaQuery.of(context).size.width) /
+              (MediaQuery.of(context).size.height -
+                  (MediaQuery.of(context).padding.top + kToolbarHeight)),
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            onTap: () => _enteredSymbol(index),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.white,
+                ),
               ),
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () => _enteredSymbol(index),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        _displaySymbols[index],
-                        style: TextStyle(
-                          color: _displaySymbols[index] == 'X'
-                              ? Colors.red
-                              : Colors.green,
-                          fontSize: 75,
-                        ),
-                      ),
-                    ),
+              child: Center(
+                child: Text(
+                  _displaySymbols[index],
+                  style: TextStyle(
+                    color: _displaySymbols[index] == 'X'
+                        ? Colors.red
+                        : Colors.green,
+                    fontSize: 75,
                   ),
-                );
-              },
+                ),
+              ),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
