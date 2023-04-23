@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   static bool _isGameOver = false;
 
-  static late String _player, _computer;
+  static String _player = '', _computer = '', _winnerMessage = '';
 
   void _setPlayer(String symbol) => _player = symbol;
   void _setComputer(String symbol) => _computer = symbol;
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void showResult(String message) {
+  void showResult() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           content: Text(
-            message,
+            _winnerMessage,
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 50,
@@ -133,13 +133,16 @@ class _HomePageState extends State<HomePage> {
 
     if (winningMoves.contains('XXX')) {
       _isGameOver = true;
-      showResult('X won');
+      _winnerMessage = 'X won';
+      showResult();
     } else if (winningMoves.contains('OOO')) {
       _isGameOver = true;
-      showResult('O won');
+      _winnerMessage = 'O won';
+      showResult();
     } else if (_filledBoxes == 9) {
       _isGameOver = true;
-      showResult('Draw');
+      _winnerMessage = 'Draw';
+      showResult();
     } else {
       return;
     }
@@ -171,6 +174,8 @@ class _HomePageState extends State<HomePage> {
 
           _checkWin();
         }
+      } else {
+        showResult();
       }
     });
   }
