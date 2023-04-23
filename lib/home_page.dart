@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
 
   void _enteredSymbol(int index) {
     setState(() {
-      if (_displaySymbols[index] == '') {
+      if (_displaySymbols[index] == '' && !_isGameOver) {
         _displaySymbols[index] = _player;
         _filledBoxes++;
 
