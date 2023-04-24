@@ -67,18 +67,19 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void clearBoard() {
+  void _clearBoard() {
     setState(() {
       for (int i = 0; i < _displaySymbols.length; i++) {
         _displaySymbols[i] = '';
       }
 
+      _winnerMessage = '';
       _filledBoxes = 0;
       _isGameOver = false;
     });
   }
 
-  void showResult() {
+  void _showResult() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -103,7 +104,7 @@ class _HomePageState extends State<HomePage> {
           actions: [
             TextButton(
               onPressed: () {
-                clearBoard();
+                _clearBoard();
                 Navigator.of(context).pop();
               },
               child: const Text(
@@ -134,15 +135,15 @@ class _HomePageState extends State<HomePage> {
     if (winningMoves.contains('XXX')) {
       _isGameOver = true;
       _winnerMessage = 'X won';
-      showResult();
+      _showResult();
     } else if (winningMoves.contains('OOO')) {
       _isGameOver = true;
       _winnerMessage = 'O won';
-      showResult();
+      _showResult();
     } else if (_filledBoxes == 9) {
       _isGameOver = true;
       _winnerMessage = 'Draw';
-      showResult();
+      _showResult();
     } else {
       return;
     }
@@ -150,32 +151,36 @@ class _HomePageState extends State<HomePage> {
 
   void _enteredSymbol(int index) {
     setState(() {
-      if (_displaySymbols[index] == '' && !_isGameOver) {
-        _displaySymbols[index] = _player;
-        _filledBoxes++;
-
-        _checkWin();
-
-        /*
-        computer's turn
-        */
-        bool foundEmptyBox = false;
-
-        while (!foundEmptyBox && !_isGameOver) {
-          int randomBox = Random().nextInt(_displaySymbols.length);
-
-          if (_filledBoxes == 9) break;
-
-          if (_displaySymbols[randomBox] == '') {
-            foundEmptyBox = true;
-            _displaySymbols[randomBox] = _computer;
-            _filledBoxes++;
-          }
+      if (_displaySymbols[index] == '') {
+        if (!_isGameOver) {
+          _displaySymbols[index] = _player;
+          _filledBoxes++;
 
           _checkWin();
+
+          /*
+          computer's turn
+          */
+          bool foundEmptyBox = false;
+
+          while (!foundEmptyBox && !_isGameOver) {
+            int randomBox = Random().nextInt(_displaySymbols.length);
+
+            if (_filledBoxes == 9) break;
+
+            if (_displaySymbols[randomBox] == '') {
+              foundEmptyBox = true;
+              _displaySymbols[randomBox] = _computer;
+              _filledBoxes++;
+            }
+
+            _checkWin();
+          }
+        } else {
+          _showResult();
         }
       } else {
-        showResult();
+        if (_isGameOver) _showResult();
       }
     });
   }
