@@ -199,33 +199,35 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: GridView.builder(
-        itemCount: 9,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height - (MediaQuery.of(context).padding.top + kToolbarHeight)),
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () => _enteredSymbol(index),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.white,
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  _displaySymbols[index],
-                  style: TextStyle(
-                    color: _displaySymbols[index] == 'X'
-                        ? Colors.red
-                        : Colors.green,
-                    fontSize: 75,
+      body: LayoutBuilder(
+        builder: (p0, p1) {
+          return GridView.builder(
+            itemCount: 9,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: p1.maxWidth / p1.maxHeight,
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                onTap: () => _enteredSymbol(index),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      _displaySymbols[index],
+                      style: TextStyle(
+                        color: _displaySymbols[index] == 'X' ? Colors.red : Colors.green,
+                        fontSize: 75,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
+              );
+            },
           );
         },
       ),
