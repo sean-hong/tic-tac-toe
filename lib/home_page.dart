@@ -69,11 +69,8 @@ class _HomePageState extends State<HomePage> {
 
   void _clearBoard() {
     setState(() {
-      for (int i = 0; i < _displaySymbols.length; i++) {
-        _displaySymbols[i] = '';
-      }
-
-      _winnerMessage = '';
+      _displaySymbols.fillRange(0, _displaySymbols.length, '');
+      _player = _winnerMessage = '';
       _filledBoxes = 0;
       _isGameOver = false;
     });
@@ -106,6 +103,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 _clearBoard();
                 Navigator.of(context).pop();
+                _selectPlayer();
               },
               child: const Text(
                 'play again?',
