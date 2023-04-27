@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.brown,
             ),
           ),
-          content: Text(
+          content: SelectableText(
             _winnerMessage,
             textAlign: TextAlign.center,
             style: const TextStyle(
