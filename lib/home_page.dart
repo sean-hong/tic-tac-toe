@@ -13,7 +13,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static final List<String> _displaySymbols = ['', '', '', '', '', '', '', '', ''];
-  static int _filledBoxes = 0;
 
   static bool _isGameOver = false;
 
@@ -71,7 +70,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _displaySymbols.fillRange(0, _displaySymbols.length, '');
       _player = _winnerMessage = '';
-      _filledBoxes = 0;
       _isGameOver = false;
     });
   }
@@ -138,7 +136,7 @@ class _HomePageState extends State<HomePage> {
       _isGameOver = true;
       _winnerMessage = 'O won';
       _showResult();
-    } else if (_filledBoxes == 9) {
+    } else if (!_displaySymbols.any((element) => element == '')) {
       _isGameOver = true;
       _winnerMessage = 'Draw';
       _showResult();
@@ -152,7 +150,6 @@ class _HomePageState extends State<HomePage> {
       if (_displaySymbols[index] == '') {
         if (!_isGameOver) {
           _displaySymbols[index] = _player;
-          _filledBoxes++;
 
           _checkWin();
 
@@ -164,12 +161,11 @@ class _HomePageState extends State<HomePage> {
           while (!foundEmptyBox && !_isGameOver) {
             int randomBox = Random().nextInt(_displaySymbols.length);
 
-            if (_filledBoxes == 9) break;
+            if (!_displaySymbols.any((element) => element == '')) break;
 
             if (_displaySymbols[randomBox] == '') {
               foundEmptyBox = true;
               _displaySymbols[randomBox] = _computer;
-              _filledBoxes++;
             }
 
             _checkWin();
