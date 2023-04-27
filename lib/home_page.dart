@@ -220,7 +220,9 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       _displaySymbols[index],
                       style: TextStyle(
-                        color: _displaySymbols[index] == 'X' ? Colors.red : Colors.green,
+                        color: _displaySymbols[index] == 'X'
+                            ? Colors.red
+                            : Colors.green,
                         fontSize: 75,
                       ),
                     ),
