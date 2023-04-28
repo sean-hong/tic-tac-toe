@@ -192,7 +192,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: InkWell(
+          onTap: () => {
+            _clearBoard(),
+            _selectPlayer(),
+          },
+          child: Text(widget.title),
+        ),
         centerTitle: true,
       ),
       body: LayoutBuilder(
