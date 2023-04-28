@@ -114,6 +114,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  bool _isGameStillPlayable() => _displaySymbols.any((element) => element == '');
+
   void _checkWin() {
     String row1 = '${_displaySymbols[0]}${_displaySymbols[1]}${_displaySymbols[2]}';
     String row2 = '${_displaySymbols[3]}${_displaySymbols[4]}${_displaySymbols[5]}';
@@ -136,7 +138,7 @@ class _HomePageState extends State<HomePage> {
       _isGameOver = true;
       _winnerMessage = 'O won';
       _showResult();
-    } else if (!_displaySymbols.any((element) => element == '')) {
+    } else if (!_isGameStillPlayable()) {
       _isGameOver = true;
       _winnerMessage = 'Draw';
       _showResult();
@@ -161,7 +163,7 @@ class _HomePageState extends State<HomePage> {
           while (!foundEmptyBox && !_isGameOver) {
             int randomBox = Random().nextInt(_displaySymbols.length);
 
-            if (!_displaySymbols.any((element) => element == '')) break;
+            if (!_isGameStillPlayable()) break;
 
             if (_displaySymbols[randomBox] == '') {
               foundEmptyBox = true;
