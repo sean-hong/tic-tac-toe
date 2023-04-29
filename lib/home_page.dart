@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static final List<String> _displaySymbols = ['', '', '', '', '', '', '', '', ''];
+  static final List<String> _displaySymbols = List.filled(9, '');
 
   static bool _isGameOver = false;
 
