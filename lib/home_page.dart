@@ -117,24 +117,22 @@ class _HomePageState extends State<HomePage> {
   bool _isGameStillPlayable() => _displaySymbols.any((element) => element == '');
 
   void _checkWin() {
-    String row1 = '${_displaySymbols[0]}${_displaySymbols[1]}${_displaySymbols[2]}';
-    String row2 = '${_displaySymbols[3]}${_displaySymbols[4]}${_displaySymbols[5]}';
-    String row3 = '${_displaySymbols[6]}${_displaySymbols[7]}${_displaySymbols[8]}';
+    Map<String, String> winningMoves = {
+      'row1': '${_displaySymbols[0]}${_displaySymbols[1]}${_displaySymbols[2]}',
+      'row2': '${_displaySymbols[3]}${_displaySymbols[4]}${_displaySymbols[5]}',
+      'row3': '${_displaySymbols[6]}${_displaySymbols[7]}${_displaySymbols[8]}',
+      'col1': '${_displaySymbols[0]}${_displaySymbols[3]}${_displaySymbols[6]}',
+      'col2': '${_displaySymbols[1]}${_displaySymbols[4]}${_displaySymbols[7]}',
+      'col3': '${_displaySymbols[2]}${_displaySymbols[5]}${_displaySymbols[8]}',
+      'diag1': '${_displaySymbols[0]}${_displaySymbols[4]}${_displaySymbols[8]}',
+      'diag2': '${_displaySymbols[2]}${_displaySymbols[4]}${_displaySymbols[6]}',
+    };
 
-    String col1 = '${_displaySymbols[0]}${_displaySymbols[3]}${_displaySymbols[6]}';
-    String col2 = '${_displaySymbols[1]}${_displaySymbols[4]}${_displaySymbols[7]}';
-    String col3 = '${_displaySymbols[2]}${_displaySymbols[5]}${_displaySymbols[8]}';
-
-    String diag1 = '${_displaySymbols[0]}${_displaySymbols[4]}${_displaySymbols[8]}';
-    String diag2 = '${_displaySymbols[2]}${_displaySymbols[4]}${_displaySymbols[6]}';
-
-    List<String> winningMoves = [row1, row2, row3, col1, col2, col3, diag1, diag2];
-
-    if (winningMoves.contains('XXX')) {
+    if (winningMoves.containsValue('XXX')) {
       _isGameOver = true;
       _winnerMessage = 'X won';
       _showResult();
-    } else if (winningMoves.contains('OOO')) {
+    } else if (winningMoves.containsValue('OOO')) {
       _isGameOver = true;
       _winnerMessage = 'O won';
       _showResult();
