@@ -87,11 +87,7 @@ class _HomePageState extends State<HomePage> {
           content: SelectableText(
             _winnerMessage,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 50,
-              color: Colors.black,
-              backgroundColor: Colors.yellow,
-            ),
+            style: const TextStyle(fontSize: 50),
           ),
           actions: [
             TextButton(
@@ -129,15 +125,15 @@ class _HomePageState extends State<HomePage> {
 
     if (winningMoves.containsValue(playerWon)) {
       _isGameOver = true;
-      _winnerMessage = '$_player won';
+      _winnerMessage = '- you won -';
       _showResult();
     } else if (winningMoves.containsValue(computerWon)) {
       _isGameOver = true;
-      _winnerMessage = '$_computer won';
+      _winnerMessage = '- you lost -';
       _showResult();
     } else if (!_isGameStillPlayable()) {
       _isGameOver = true;
-      _winnerMessage = 'Draw';
+      _winnerMessage = '- draw -';
       _showResult();
     } else {
       return;
@@ -155,19 +151,16 @@ class _HomePageState extends State<HomePage> {
           /*
           computer's turn
           */
-          bool foundEmptyBox = false;
-
-          while (!foundEmptyBox && !_isGameOver) {
+          while (!_isGameOver) {
             int randomBox = Random().nextInt(_displaySymbols.length);
 
             if (!_isGameStillPlayable()) break;
 
             if (_displaySymbols[randomBox] == '') {
-              foundEmptyBox = true;
               _displaySymbols[randomBox] = _computer;
+              _checkWin();
+              break;
             }
-
-            _checkWin();
           }
         } else {
           _showResult();
@@ -219,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                       _displaySymbols[index],
                       style: TextStyle(
-                        color: _displaySymbols[index] == 'X'
+                        color: _displaySymbols[index] == _player
                             ? Colors.red
                             : Colors.green,
                         fontSize: 75,
