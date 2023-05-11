@@ -18,9 +18,6 @@ class _HomePageState extends State<HomePage> {
 
   static String _player = '', _computer = '', _winnerMessage = '';
 
-  void _setPlayer(String symbol) => _player = symbol;
-  void _setComputer(String symbol) => _computer = symbol;
-
   void _selectPlayer() {
     showDialog(
       barrierDismissible: false,
@@ -38,8 +35,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 TextButton(
                   onPressed: () {
-                    _setPlayer('X');
-                    _setComputer('O');
+                    _player = 'X';
+                    _computer = 'O';
                     Navigator.of(context).pop();
                   },
                   child: const Text(
@@ -49,8 +46,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    _setPlayer('O');
-                    _setComputer('X');
+                    _player = 'O';
+                    _computer = 'X';
                     Navigator.of(context).pop();
                   },
                   child: const Text(
