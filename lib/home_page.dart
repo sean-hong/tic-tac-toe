@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
   bool _isGameStillPlayable() => _displaySymbols.any((element) => element == '');
 
   void _checkWin() {
-    Map<String, String> winningMoves = {
+    final Map<String, String> winningMoves = {
       'row1': '${_displaySymbols[0]}${_displaySymbols[1]}${_displaySymbols[2]}',
       'row2': '${_displaySymbols[3]}${_displaySymbols[4]}${_displaySymbols[5]}',
       'row3': '${_displaySymbols[6]}${_displaySymbols[7]}${_displaySymbols[8]}',
@@ -125,13 +125,15 @@ class _HomePageState extends State<HomePage> {
       'diag2': '${_displaySymbols[2]}${_displaySymbols[4]}${_displaySymbols[6]}',
     };
 
-    if (winningMoves.containsValue('XXX')) {
+    final String playerWon = _player * 3, computerWon = _computer * 3;
+
+    if (winningMoves.containsValue(playerWon)) {
       _isGameOver = true;
-      _winnerMessage = 'X won';
+      _winnerMessage = '$_player won';
       _showResult();
-    } else if (winningMoves.containsValue('OOO')) {
+    } else if (winningMoves.containsValue(computerWon)) {
       _isGameOver = true;
-      _winnerMessage = 'O won';
+      _winnerMessage = '$_computer won';
       _showResult();
     } else if (!_isGameStillPlayable()) {
       _isGameOver = true;
