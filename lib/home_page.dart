@@ -19,6 +19,8 @@ class _HomePageState extends State<HomePage> {
   static String _player = '', _computer = '', _winnerMessage = '';
 
   void _selectPlayer() {
+    final List<String> options = ['X', 'O'];
+
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -35,24 +37,24 @@ class _HomePageState extends State<HomePage> {
               children: [
                 TextButton(
                   onPressed: () {
-                    _player = 'X';
-                    _computer = 'O';
+                    _player = options.first;
+                    _computer = options.last;
                     Navigator.of(context).pop();
                   },
-                  child: const Text(
-                    'X',
-                    style: TextStyle(fontSize: 75),
+                  child: Text(
+                    options.first,
+                    style: const TextStyle(fontSize: 75),
                   ),
                 ),
                 TextButton(
                   onPressed: () {
-                    _player = 'O';
-                    _computer = 'X';
+                    _player = options.last;
+                    _computer = options.first;
                     Navigator.of(context).pop();
                   },
-                  child: const Text(
-                    'O',
-                    style: TextStyle(fontSize: 75),
+                  child: Text(
+                    options.last,
+                    style: const TextStyle(fontSize: 75),
                   ),
                 ),
               ],
@@ -121,6 +123,7 @@ class _HomePageState extends State<HomePage> {
       'diag2': '${_displaySymbols[2]}${_displaySymbols[4]}${_displaySymbols[6]}',
     };
 
+    // XXX or OOO
     final String playerWon = _player * 3, computerWon = _computer * 3;
 
     if (winningMoves.containsValue(playerWon)) {
