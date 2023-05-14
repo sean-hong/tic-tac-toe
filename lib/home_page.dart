@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   static String _player = '', _computer = '', _winnerMessage = '';
 
   void _selectPlayer() {
-    final List<String> options = ['X', 'O'];
+    final List<String> options = ['❌', '😮'];
 
     showDialog(
       barrierDismissible: false,
