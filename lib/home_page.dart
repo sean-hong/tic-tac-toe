@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   static String _player = '', _computer = '', _winnerMessage = '';
 
-  void _selectPlayer() {
+  _selectPlayer() {
     final List<String> options = ['❌', '😮'];
 
     showDialog(
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _clearBoard() {
+  _clearBoard() {
     setState(() {
       _displaySymbols.fillRange(0, _displaySymbols.length, '');
       _player = _winnerMessage = '';
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _showResult() {
+  _showResult() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
 
   bool _isGameStillPlayable() => _displaySymbols.any((element) => element == '');
 
-  void _checkWin() {
+  _checkWin() {
     final Map<String, String> winningMoves = {
       'row1': '${_displaySymbols[0]}${_displaySymbols[1]}${_displaySymbols[2]}',
       'row2': '${_displaySymbols[3]}${_displaySymbols[4]}${_displaySymbols[5]}',
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _enteredSymbol(int index) {
+  _enteredSymbol(int index) {
     setState(() {
       if (_displaySymbols[index] == '') {
         if (!_isGameOver) {
@@ -175,7 +175,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void initState() {
+  initState() {
     super.initState();
 
     Future(_selectPlayer);
